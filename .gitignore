@@ -1,0 +1,4 @@
+# .gitignore 推荐写法
+streamlit_env/
+__pycache__/
+*.pyc
