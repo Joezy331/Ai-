@@ -1,218 +1,161 @@
-# Byte-compiled / optimized / DLL files
-__pycache__/
-*.py[codz]
-*$py.class
+import streamlit as st
+import PyPDF2
+from openai import OpenAI
 
-# C extensions
-*.so
+# -----------------------------
+# 页面基础设置
+# -----------------------------
 
-# Distribution / packaging
-.Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-share/python-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
-MANIFEST
+st.set_page_config(
+    page_title="AI Resume Assistant",
+    page_icon="🤖",
+    layout="wide"
+)
 
-# PyInstaller
-#   Usually these files are written by a python script from a template
-#   before PyInstaller builds the exe, so as to inject date/other infos into it.
-*.manifest
-*.spec
+# -----------------------------
+# 初始化大模型（硅基流动）
+# -----------------------------
 
-# Installer logs
-pip-log.txt
-pip-delete-this-directory.txt
+client = OpenAI(
+    api_key="sk-pmchycpgzryqpiwwhzsyaxkpoghapsnrxvqwxvzolxvkcjsh",
+    base_url="https://api.siliconflow.cn/v1"
+)
 
-# Unit test / coverage reports
-htmlcov/
-.tox/
-.nox/
-.coverage
-.coverage.*
-.cache
-nosetests.xml
-coverage.xml
-*.cover
-*.py.cover
-.hypothesis/
-.pytest_cache/
-cover/
+# -----------------------------
+# Sidebar
+# -----------------------------
 
-# Translations
-*.mo
-*.pot
+with st.sidebar:
 
-# Django stuff:
-*.log
-local_settings.py
-db.sqlite3
-db.sqlite3-journal
+    st.title("🤖 AI Resume Assistant")
 
-# Flask stuff:
-instance/
-.webassets-cache
+    st.write("一个基于大模型的简历分析工具")
 
-# Scrapy stuff:
-.scrapy
+    st.write("### 功能")
+    st.write("✅ PDF简历上传")
+    st.write("✅ 岗位JD分析")
+    st.write("✅ AI匹配评分")
+    st.write("✅ 面试问题生成")
 
-# Sphinx documentation
-docs/_build/
+# -----------------------------
+# 主页面
+# -----------------------------
 
-# PyBuilder
-.pybuilder/
-target/
+st.title("AI Resume Assistant")
 
-# Jupyter Notebook
-.ipynb_checkpoints
+st.header("Resume Analysis")
 
-# IPython
-profile_default/
-ipython_config.py
+st.write("上传简历并输入岗位JD，AI会自动分析。")
 
-# pyenv
-#   For a library or package, you might want to ignore these files since the code is
-#   intended to run in multiple environments; otherwise, check them in:
-# .python-version
+# -----------------------------
+# 上传PDF
+# -----------------------------
 
-# pipenv
-#   According to pypa/pipenv#598, it is recommended to include Pipfile.lock in version control.
-#   However, in case of collaboration, if having platform-specific dependencies or dependencies
-#   having no cross-platform support, pipenv may install dependencies that don't work, or not
-#   install all needed dependencies.
-# Pipfile.lock
+uploaded_file = st.file_uploader(
+    "上传你的简历 PDF",
+    type="pdf",
+    key="resume_uploader"
+)
 
-# UV
-#   Similar to Pipfile.lock, it is generally recommended to include uv.lock in version control.
-#   This is especially recommended for binary packages to ensure reproducibility, and is more
-#   commonly ignored for libraries.
-# uv.lock
+# -----------------------------
+# JD输入框
+# -----------------------------
 
-# poetry
-#   Similar to Pipfile.lock, it is generally recommended to include poetry.lock in version control.
-#   This is especially recommended for binary packages to ensure reproducibility, and is more
-#   commonly ignored for libraries.
-#   https://python-poetry.org/docs/basic-usage/#commit-your-poetrylock-file-to-version-control
-# poetry.lock
-# poetry.toml
+job_description = st.text_area(
+    "请输入岗位JD",
+    height=250,
+    key="job_description_input"
+)
 
-# pdm
-#   Similar to Pipfile.lock, it is generally recommended to include pdm.lock in version control.
-#   pdm recommends including project-wide configuration in pdm.toml, but excluding .pdm-python.
-#   https://pdm-project.org/en/latest/usage/project/#working-with-version-control
-# pdm.lock
-# pdm.toml
-.pdm-python
-.pdm-build/
+# -----------------------------
+# 读取PDF内容
+# -----------------------------
 
-# pixi
-#   Similar to Pipfile.lock, it is generally recommended to include pixi.lock in version control.
-# pixi.lock
-#   Pixi creates a virtual environment in the .pixi directory, just like venv module creates one
-#   in the .venv directory. It is recommended not to include this directory in version control.
-.pixi
+resume_text = ""
 
-# PEP 582; used by e.g. github.com/David-OConnor/pyflow and github.com/pdm-project/pdm
-__pypackages__/
+if uploaded_file:
 
-# Celery stuff
-celerybeat-schedule
-celerybeat.pid
+    pdf_reader = PyPDF2.PdfReader(uploaded_file)
 
-# Redis
-*.rdb
-*.aof
-*.pid
+    for page in pdf_reader.pages:
 
-# RabbitMQ
-mnesia/
-rabbitmq/
-rabbitmq-data/
+        text = page.extract_text()
 
-# ActiveMQ
-activemq-data/
+        if text:
+            resume_text += text
 
-# SageMath parsed files
-*.sage.py
+    st.subheader("简历内容预览")
 
-# Environments
-.env
-.envrc
-.venv
-env/
-venv/
-ENV/
-env.bak/
-venv.bak/
+    st.text(resume_text[:2000])
 
-# Spyder project settings
-.spyderproject
-.spyproject
+# -----------------------------
+# Analyze按钮
+# -----------------------------
 
-# Rope project settings
-.ropeproject
+if st.button("Analyze Resume", key="analyze_button"):
 
-# mkdocs documentation
-/site
+    # 未上传PDF
+    if not uploaded_file:
 
-# mypy
-.mypy_cache/
-.dmypy.json
-dmypy.json
+        st.warning("请先上传简历PDF")
 
-# Pyre type checker
-.pyre/
+    # 未输入JD
+    elif not job_description:
 
-# pytype static type analyzer
-.pytype/
+        st.warning("请输入岗位JD")
 
-# Cython debug symbols
-cython_debug/
+    else:
 
-# PyCharm
-#   JetBrains specific template is maintained in a separate JetBrains.gitignore that can
-#   be found at https://github.com/github/gitignore/blob/main/Global/JetBrains.gitignore
-#   and can be added to the global gitignore or merged into this file.  For a more nuclear
-#   option (not recommended) you can uncomment the following to ignore the entire idea folder.
-# .idea/
+        with st.spinner("AI正在分析中..."):
 
-# Abstra
-#   Abstra is an AI-powered process automation framework.
-#   Ignore directories containing user credentials, local state, and settings.
-#   Learn more at https://abstra.io/docs
-.abstra/
+            # Prompt
+            prompt = f"""
+你是一名资深HR和AI产品经理面试官。
 
-# Visual Studio Code
-#   Visual Studio Code specific template is maintained in a separate VisualStudioCode.gitignore 
-#   that can be found at https://github.com/github/gitignore/blob/main/Global/VisualStudioCode.gitignore
-#   and can be added to the global gitignore or merged into this file. However, if you prefer, 
-#   you could uncomment the following to ignore the entire vscode folder
-# .vscode/
-# Temporary file for partial code execution
-tempCodeRunnerFile.py
+请根据岗位JD分析候选人简历。
 
-# Ruff stuff:
-.ruff_cache/
+请输出：
 
-# PyPI configuration file
-.pypirc
+# 1. 匹配评分（0-100）
 
-# Marimo
-marimo/_static/
-marimo/_lsp/
-__marimo__/
+# 2. 候选人优势
 
-# Streamlit
-.streamlit/secrets.toml
+# 3. 缺失技能
+
+# 4. 简历优化建议
+
+# 5. 可能出现的面试问题
+
+请使用清晰Markdown格式输出。
+
+岗位JD：
+{job_description}
+
+候选人简历：
+{resume_text}
+"""
+
+            try:
+
+                response = client.chat.completions.create(
+                    model="Qwen/Qwen2.5-7B-Instruct",
+                    messages=[
+                        {
+                            "role": "user",
+                            "content": prompt
+                        }
+                    ],
+                    temperature=0.7
+                )
+
+                answer = response.choices[0].message.content
+
+                st.success("分析完成！")
+
+                st.subheader("AI 分析结果")
+
+                st.markdown(answer)
+
+            except Exception as e:
+
+                st.error(f"发生错误：{e}")
