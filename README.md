@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # AI Resume Assistant
 
 An AI-powered resume analysis web application built with Streamlit and Qwen LLM.
@@ -66,3 +67,8 @@ AI-Resume-Assistant/
 
 ```bash
 pip install -r requirements.txt
+=======
+# Ai--Resume-Assistant
+AI-powered resume analysis assistant using Qwen LLM and Streamlit.
+实现简历制作、优化、格式调整相关功能
+>>>>>>> e2034a31ceb9b925c94cf51e275c4057dd1d07de
