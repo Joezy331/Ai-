@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # AI Resume Assistant
 
 An AI-powered resume analysis web application built with Streamlit and Qwen LLM.
@@ -11,7 +10,52 @@ This project allows users to upload PDF resumes and input job descriptions (JD).
 The system uses a Large Language Model (LLM) to analyze resume-job matching, identify missing skills, and generate optimization suggestions.
 
 ---
+## 项目演示(Ai PM)
 
+### 主界面与简历上传
+![主界面](images/ai1.png)
+
+### 匹配评分与候选人优势分析
+![分析结果](images/ai2.png)
+
+### 优化建议与面试题生成
+![面试题生成](images/ai3.png)
+
+### 主界面与简历上传(Sales)
+![主界面](images/SA1.png images/SA2.png)
+
+### 匹配评分与候选人优势分析
+![分析结果](images/SA3.png)
+
+### 优化建议
+![主界面](images/SA4.png images/SA5.png)
+
+### 主界面与简历上传(Sales)
+![主界面](images/FE1.png)
+
+### 匹配评分与候选人优势分析
+![分析结果](images/FE2.png)
+
+### 优化建议
+![主界面](images/FE3.png)
+
+### 主界面与简历上传(Sales)
+![主界面](images/SD1.png)
+
+### 匹配评分与候选人优势分析
+![分析结果](images/SD2.png)
+
+### 优化建议
+![主界面](images/SD3.png)
+
+### 主界面与简历上传(Sales)
+![主界面](images/SE1.png images/SE2.png)
+
+### 匹配评分与候选人优势分析
+![分析结果](images/SE3.png)
+
+### 优化建议
+![主界面](images/SE4.png )
 ## Features
 
 - PDF Resume Upload
@@ -63,12 +107,4 @@ AI-Resume-Assistant/
 
 ---
 
-## Installation
 
-```bash
-pip install -r requirements.txt
-=======
-# Ai--Resume-Assistant
-AI-powered resume analysis assistant using Qwen LLM and Streamlit.
-实现简历制作、优化、格式调整相关功能
->>>>>>> e2034a31ceb9b925c94cf51e275c4057dd1d07de
