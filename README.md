@@ -22,15 +22,17 @@ The system uses a Large Language Model (LLM) to analyze resume-job matching, ide
 ![面试题生成](images/ai3.png)
 
 ### 主界面与简历上传(Sales)
-![主界面](images/SA1.png images/SA2.png)
+![主界面1](images/SA1.png )
+![主界面2](images/SA2.png )
 
 ### 匹配评分与候选人优势分析
 ![分析结果](images/SA3.png)
 
 ### 优化建议
-![主界面](images/SA4.png images/SA5.png)
+![主界面](images/SA4.png )
+![主界面](images/SA5.png )
 
-### 主界面与简历上传(Sales)
+### 主界面与简历上传(Front-End Development)
 ![主界面](images/FE1.png)
 
 ### 匹配评分与候选人优势分析
@@ -39,7 +41,7 @@ The system uses a Large Language Model (LLM) to analyze resume-job matching, ide
 ### 优化建议
 ![主界面](images/FE3.png)
 
-### 主界面与简历上传(Sales)
+### 主界面与简历上传(Software Development)
 ![主界面](images/SD1.png)
 
 ### 匹配评分与候选人优势分析
@@ -48,8 +50,9 @@ The system uses a Large Language Model (LLM) to analyze resume-job matching, ide
 ### 优化建议
 ![主界面](images/SD3.png)
 
-### 主界面与简历上传(Sales)
-![主界面](images/SE1.png images/SE2.png)
+### 主界面与简历上传(Software Engineer)
+![主界面](images/SE1.png )
+![主界面](images/SE2.png )
 
 ### 匹配评分与候选人优势分析
 ![分析结果](images/SE3.png)
